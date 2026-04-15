@@ -18,4 +18,18 @@ export class BasePage {
   async waitForLoad() {
     await this.page.waitForLoadState('networkidle');
   }
+
+  // ID, Class, XPath, CSS - selector
+  // ex: fillInput('#user-name', 'user-001')
+  async fillInput(selector: string, value: string | number) {
+    const stringValue = typeof value === 'string' ? value : String(value);
+    await this.page.fill(selector, stringValue);
+}
+
+  async waitForSuccessToast(selector = '.toast-success', timeout = 5000) {
+    await this.page.waitForSelector(selector, { 
+        state: 'visible', 
+        timeout: timeout // default = 5s
+    });
+  }
 }
