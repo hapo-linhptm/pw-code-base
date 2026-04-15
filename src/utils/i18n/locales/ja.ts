@@ -2,6 +2,6 @@ import { TranslationKeys } from '../types';
 
 export const ja: TranslationKeys = {
     common: {
-        welcome: 'ようこそ',
+        welcome: '勤怠管理',
     }
 };

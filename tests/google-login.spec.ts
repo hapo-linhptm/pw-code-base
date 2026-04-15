@@ -4,7 +4,7 @@ import { test } from './playwright-fixtures';
 const GOOGLE_ACCOUNT_EMAIL = process.env.TEST_USER_EMAIL || 'linh.ptm@haposoft.com';
 const GOOGLE_ACCOUNT_PASSWORD = process.env.TEST_USER_PASSWORD || '';
 
-test('login with Google redirects to attendance page', async ({ page, context, loginPage }) => {
+test('login with Google redirects to attendance page', async ({ page, context, loginPage, t }) => {
   // --- Arrange ---
   // Increase test timeout to 5 minutes to allow for manual 2FA confirmation
   test.setTimeout(300000);
@@ -72,4 +72,5 @@ test('login with Google redirects to attendance page', async ({ page, context, l
   // --- Assert ---
   // Final verification with extended timeout for manual 2FA
   await expect(page).toHaveURL(/\/attendance(?:\/)?(?:\?.*)?$/, { timeout: 240000 });
+  await expect(page.getByText(`${t.common.welcome}`)).toBeVisible();
 });
