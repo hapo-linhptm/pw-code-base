@@ -1,4 +1,5 @@
 import type { APIRequestContext, APIResponse } from '@playwright/test';
+import { BASE_URL } from '../utils/constants/common';
 
 export class ApiClient {
   private readonly request: APIRequestContext;
@@ -7,7 +8,7 @@ export class ApiClient {
   constructor(request: APIRequestContext) {
     this.request = request;
     // Keep BASE_URL normalized for safe URL concatenation.
-    this.base = (process.env.BASE_URL ?? '').replace(/\/$/, '');
+    this.base = (BASE_URL).replace(/\/$/, '');
   }
 
   async createUser(payload: Record<string, unknown>): Promise<APIResponse> {
